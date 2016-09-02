@@ -5,6 +5,10 @@ class FacebookController < Messenger::MessengerController
     p '!!!!!!!!!!!!!!!!!!!!!!!'
     p fb_params
     p '!!!!!!!!!!!!!!!!!!!!!!!'
+    p fb_params.first_entry.callback
+    p '!!!!!!!!!!!!!!!!!!!!!!!'
+    p fb_params.first_entry
+    p '!!!!!!!!!!!!!!!!!!!!!!!'
     
     if fb_params.first_entry.callback.message?
       Messenger::Client.send(
@@ -14,22 +18,8 @@ class FacebookController < Messenger::MessengerController
         )
       )
     end
-    
-    render nothing: true, status: 200
+
+    head :ok
   end
-  
-#  def webhook
-    #logic here
-    
-#    if fb_params.first_entry.callback.message?
-#      Messenger::Client.send(
-#        Messenger::Request.new(
-#          Messenger::Elements::Text.new(text: "Echo: #{fb_params.first_entry.callback.text}"),
-#          fb_params.first_entry.sender_id
-#        )
-#      )
-#    end
-#    render nothing: true, status: 200
-#  end
   
 end
